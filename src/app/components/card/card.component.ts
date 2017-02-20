@@ -1,9 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.css'],
+  animations: [
+    trigger('flipState', [
+      state('active', style({
+        transform: 'rotateY(179.9deg)'
+      })),
+      state('inactive', style({
+        transform: 'rotateY(0)'
+      })),
+      transition('active => inactive', animate('500ms ease-out')),
+      transition('inactive => active', animate('500ms ease-in'))
+    ])  
+  ]
+
 })
 export class CardComponent implements OnInit {
 
@@ -21,9 +34,22 @@ export class CardComponent implements OnInit {
     <p>Magna do veniam do commodo ad exercitation fugiat proident elit reprehenderit occaecat do. Consectetur consectetur eu voluptate Lorem consequat sit ipsum aute eu veniam. Nostrud consectetur amet ea enim magna velit duis minim. Fugiat nulla mollit laborum sunt magna laborum. Eu pariatur sit ea nulla incididunt exercitation qui mollit. Consectetur est ut exercitation cillum ut exercitation sunt.</p>
   `;
 
+  flip: string = 'inactive';
+  cardClass: string = '';
+
   constructor() { }
 
   ngOnInit() {
+  }
+  
+  toggleFlip() {
+    this.flip = (this.flip == 'inactive') ? 'active' : 'inactive';
+    if (this.flip == 'active'){
+      this.cardClass = 'hide';
+    } else {
+      this.cardClass = '';
+    }
+    
   }
 
 }

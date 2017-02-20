@@ -1,64 +1,88 @@
 <!-- fxLayout row to contain the md-card centrally aligned (vertically and horizontally) -->
 <div fxLayout="column" fxLayoutAlign="center start">
 
-  <md-card>
-    
-    <!-- Card Header -->
+  <div class="tp-wrapper">
+    <div class="tp-box" [@flipState]="flip">
 
-    <!-- fxLayout row to contain the header fields -->
-    <!-- The inner components will be aligned in the left and top of the fxLayout except
-    for devices greated than medium, when they will align in the center and top  -->
-    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutAlign.gt-sm="center start">
+      <!-- Front -->
+      <div class="tp-box__side tp-box__front">
 
-      <!-- this div will fill 100% of the fxLayot, except
-      for devices greated than medium, when it will fill 80%  -->
-      <div fxFlex fxFlex.gt-sm="60%">
+        <md-card [ngClass]="cardClass">
+          <!-- Card Header -->
+          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutAlign.gt-sm="center start">
+            <div fxFlex fxFlex.gt-sm="60%">
 
-        <md-card-subtitle><i> {{ lesson }} </i></md-card-subtitle>
-        <md-card-title> {{ title }} </md-card-title>  
+            <md-card-subtitle><i> {{ lesson }} </i></md-card-subtitle>
+            <md-card-title> {{ title }} </md-card-title>  
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <img *ngIf="avatarUrl" md-card-avatar [src]="avatarUrl">
+              <md-icon *ngIf="!avatarUrl" style="font-size: 40px; height: 40px; width: 40px; color: #333;" >
+                account_circle</md-icon>
+              <span style="font-weight: 500;">{{ userName }}</span>
+            </div>
 
-        <!-- Card Header -->
-        <!-- The components inside this row will be placed side by side aligned on the left vertically 
-        and center horizontally -->
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <img *ngIf="avatarUrl" md-card-avatar [src]="avatarUrl">
-          <md-icon *ngIf="!avatarUrl" style="font-size: 40px; height: 40px; width: 40px; color: #333;" >
-            account_circle</md-icon>
-          <span style="font-weight: 500;">{{ userName }}</span>
-        </div>
+            <!-- Divider -->
+            <hr width="200px" size="5px" align="left" color="orange" style="margin-top: 50px;">
 
-        <!-- Divider -->
-        <hr width="200px" size="5px" align="left" color="orange" style="margin-top: 50px;">
+            </div>
+          </div>
+
+          <!-- Progress bar -->
+          <md-progress-bar
+            [value]="progress"
+            style="margin-top: 50px; margin-bottom: 50px">
+          </md-progress-bar> 
+
+        <!-- Card Content -->
+        <md-card-content>
+          <!-- fxLayot follows the header definition -->
+          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutAlign.gt-sm="center start">
+            <div fxFlex fxFlex.gt-sm="60%">
+              <div [innerHTML]="contentHTML"></div>
+            </div>
+          </div>
+
+        </md-card-content>
+
+          <!-- Buttons -->
+          <md-card-actions>
+            <div fxLayout="row">
+              <span fxFlex></span>
+              <button color="primary" md-raised-button
+                (click)="toggleFlip()">Flip</button>
+            </div>
+          </md-card-actions>
+          
+        </md-card>
 
       </div>
+
+      <!-- Back -->
+      <div class="tp-box__side tp-box__back">
+
+        <md-card>
+          <md-card-header>
+            <md-card-title>Cards back</md-card-title>
+          </md-card-header>
+          <md-card-content>
+            <p>
+              Back of the card.
+            </p>
+          </md-card-content>
+
+          <md-card-actions>
+            <div fxLayout="row">
+              <span fxFlex></span>
+              <button color="primary" md-raised-button
+                (click)="toggleFlip()">Flip</button>
+            </div>
+          </md-card-actions>
+
+        </md-card>
+
+      </div>
+
     </div>
+  </div>
 
-    <!-- Progress bar -->
-    <md-progress-bar
-      [value]="progress"
-      style="margin-top: 50px; margin-bottom: 50px">
-    </md-progress-bar> 
-
-    <!-- Card Content -->
-    <md-card-content>
-
-      <!-- fxLayot follows the header definition -->
-      
-      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutAlign.gt-sm="center start">
-        <div fxFlex fxFlex.gt-sm="60%">
-          <div [innerHTML]="contentHTML"></div>
-        </div>
-      </div>
-
-    </md-card-content>
-
-    <!-- Buttons -->
-    <md-card-actions>
-      <div fxLayout="row">
-        <span fxFlex></span>
-        <button color="primary" md-raised-button>Flip</button>
-      </div>
-    </md-card-actions>
-
-  </md-card>
 </div>

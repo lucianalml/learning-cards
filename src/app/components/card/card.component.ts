@@ -1,4 +1,12 @@
-import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, 
+  OnInit, 
+  trigger, 
+  state, 
+  style, 
+  transition, 
+  animate,
+  ElementRef,
+  ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -20,6 +28,12 @@ import { Component, OnInit, trigger, state, style, transition, animate } from '@
 })
 export class CardComponent implements OnInit {
 
+  @ViewChild('divCard') 
+  divCard: ElementRef;
+
+  cardHeight: number;
+  flip: string = 'inactive';
+
   userName: string = "Wilfried Ifland";
   avatarUrl: string;
 
@@ -34,9 +48,6 @@ export class CardComponent implements OnInit {
     <p>Magna do veniam do commodo ad exercitation fugiat proident elit reprehenderit occaecat do. Consectetur consectetur eu voluptate Lorem consequat sit ipsum aute eu veniam. Nostrud consectetur amet ea enim magna velit duis minim. Fugiat nulla mollit laborum sunt magna laborum. Eu pariatur sit ea nulla incididunt exercitation qui mollit. Consectetur est ut exercitation cillum ut exercitation sunt.</p>
   `;
 
-  flip: string = 'inactive';
-  cardClass: string = '';
-
   constructor() { }
 
   ngOnInit() {
@@ -44,12 +55,15 @@ export class CardComponent implements OnInit {
   
   toggleFlip() {
     this.flip = (this.flip == 'inactive') ? 'active' : 'inactive';
-    if (this.flip == 'active'){
-      this.cardClass = 'hide';
-    } else {
-      this.cardClass = '';
-    }
-    
+
+    this.cardHeight = this.divCard.nativeElement.firstElementChild.offsetHeight - 48;
+
   }
+
+  onResize(event) {
+    // event.target.innerWidth;
+    this.cardHeight = this.divCard.nativeElement.firstElementChild.offsetHeight - 48; 
+  }
+
 
 }

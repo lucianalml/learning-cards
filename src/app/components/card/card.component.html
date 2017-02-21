@@ -5,9 +5,9 @@
     <div class="tp-box" [@flipState]="flip">
 
       <!-- Front -->
-      <div class="tp-box__side tp-box__front">
+      <div class="tp-box__side tp-box__front" #divCard (window:resize)="onResize($event)">
 
-        <md-card [ngClass]="cardClass">
+        <md-card id="mdCard"> 
           <!-- Card Header -->
           <div fxLayout="row" fxLayoutAlign="start start" fxLayoutAlign.gt-sm="center start">
             <div fxFlex fxFlex.gt-sm="60%">
@@ -60,16 +60,27 @@
       <!-- Back -->
       <div class="tp-box__side tp-box__back">
 
-        <md-card>
-          <md-card-header>
-            <md-card-title>Cards back</md-card-title>
-          </md-card-header>
-          <md-card-content>
-            <p>
-              Back of the card.
-            </p>
-          </md-card-content>
+        <md-card [style.height.px]="cardHeight">
 
+          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutAlign.gt-sm="center start">
+            <div fxFlex fxFlex.gt-sm="60%">
+            <md-card-title> Back of the card </md-card-title>  
+            </div>
+          </div>
+
+        <!-- Card Content -->
+        <md-card-content>
+          <!-- fxLayot follows the header definition -->
+          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutAlign.gt-sm="center start">
+            <div fxFlex fxFlex.gt-sm="60%">
+              <p>
+                Back of the card.
+              </p>
+            </div>
+          </div>
+        </md-card-content>
+
+          <!-- Buttons -->
           <md-card-actions>
             <div fxLayout="row">
               <span fxFlex></span>
@@ -77,6 +88,7 @@
                 (click)="toggleFlip()">Flip</button>
             </div>
           </md-card-actions>
+
 
         </md-card>
 

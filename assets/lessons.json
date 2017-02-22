@@ -1,0 +1,26 @@
+[
+    {
+        "id" : 1,
+        "number": 1,
+        "title": "Simple lesson",
+        "front": "<p>Lesson 1 Example Ut nostrud nostrud laboris reprehenderit officia reprehenderit irure. Reprehenderit id magna irure sit. Incididunt aute elit dolore pariatur do irure. Mollit officia est adipisicing voluptate tempor pariatur quis nulla minim. Sint eiusmod sint deserunt laboris Lorem eu amet do nisi minim quis aliqua.</p><p>Magna do veniam do commodo ad exercitation fugiat proident elit reprehenderit occaecat do. Consectetur consectetur eu voluptate Lorem consequat sit ipsum aute eu veniam. Nostrud consectetur amet ea enim magna velit duis minim. Fugiat nulla mollit laborum sunt magna laborum. Eu pariatur sit ea nulla incididunt exercitation qui mollit. Consectetur est ut exercitation cillum ut exercitation sunt.</p>",
+        "back" : "<p>Back of the card Ut nostrud nostrud laboris reprehenderit officia reprehenderit irure. Reprehenderit id magna irure sit. Incididunt aute elit dolore pariatur do irure. Mollit officia est adipisicing voluptate tempor pariatur quis nulla minim. Sint eiusmod sint deserunt laboris Lorem eu amet do nisi minim quis aliqua.</p><p>Magna do veniam do commodo ad exercitation fugiat proident elit reprehenderit occaecat do. Consectetur consectetur eu voluptate Lorem consequat sit ipsum aute eu veniam. Nostrud consectetur amet ea enim magna velit duis minim. Fugiat nulla mollit laborum sunt magna laborum. Eu pariatur sit ea nulla incididunt exercitation qui mollit. Consectetur est ut exercitation cillum ut exercitation sunt.</p>",
+        "completed": false
+    },
+    {
+        "id" : 2,
+        "number": 2,
+        "title": "Simple lesson 2",
+        "front": "<p>Lesson 2 example.</p>",
+        "back" : "<p>Lesson 2 example back of the card.</p>",
+        "completed": false
+    },
+    {
+        "id" : 3,
+        "number": 3,
+        "title": "Simple lesson 3",
+        "front": "<p>Lesson 3 example.</p>",
+        "back" : "<p>Lesson 3 example back of the card.</p>",
+        "completed": false
+    }
+]

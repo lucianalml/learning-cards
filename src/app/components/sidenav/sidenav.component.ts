@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Lesson } from '../../shared/lesson';
+import { LessonService } from '../../shared/lesson.service';
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -7,29 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
 
-  lessons = [
-    { title: 'Lesson 1',
-      completed: false },
-    { 
-      title: 'Lesson 2',
-      completed: false 
-    }
-  ];
-
+  lessons: Lesson[] = [];
   concluded = 0;
 
-  constructor() { }
+  constructor(private lessonService: LessonService) { }
 
   ngOnInit() {
-    console.log(this.lessons);
 
-    this.concluded = (100 * this.lessons.filter(lesson => lesson.completed).length) / this.lessons.length;
+    this.lessonService.getLessons()
+      .subscribe(lessons => {
+        this.lessons = lessons;
+        this.concluded = (100 * this.lessons.filter(lesson => lesson.completed).length) / this.lessons.length;
+    });
 
   }
 
   checkLesson(i: number){
-    this.lessons[i].completed = ! this.lessons[i].completed;
-    this.concluded = (100 * this.lessons.filter(lesson => lesson.completed).length) / this.lessons.length;
+    this.lessonService.checkLesson(this.lessons[i]);
   }
 
 }

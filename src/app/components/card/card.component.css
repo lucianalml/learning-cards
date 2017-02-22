@@ -1,34 +1,47 @@
-.tp-wrapper {
-      perspective: 800px;
-      width: 100%;
-    }
-    
-    .tp-box {
-      position: relative;
-      /*width: 900px;*/
-      width: 100%;
-      /*height: 100px;
-      margin: 3rem auto;*/
-      transform-style: preserve-3d;
-      transition: transform 1s;
-    }
-    .tp-box__side {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      backface-visibility: hidden;
-      /*color: #fff;
-      text-align: center;
-      line-height: 100px;
-      font-size: 24px;
-      font-weight: 700;
-      cursor: pointer;
-      user-select: none;*/
-    }
-    .tp-box__front {
-      /*background: #f30d36;*/
-    }
-    .tp-box__back {
-      /*background: #23262d;*/
-      transform: rotateY(179.9deg);
-    }
+.flip3D {
+  background-color: white;
+  margin: 10px;
+  overflow: hidden;
+  display: inline-block;
+}
+.flip3D .front {
+   -webkit-transform: perspective(8000px) rotateY(0deg);
+  transform: perspective(8000px) rotateY(0deg);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: transform 1s linear 0s;
+  -moz-transition: transform 1s linear 0s;
+  -ms-transition: transform 1s linear 0s;
+  -o-transition: transform 1s linear 0s;
+  transition: transform 1s linear 0s;
+}
+/*.flip3D:hover .front {
+  -webkit-transform: perspective(8000px) rotateY(180deg);
+  transform: perspective(8000px) rotateY(180deg);
+}
+*/
+.flip3D .front.flippedFront {
+     -webkit-transform: perspective(8000px) rotateY(180deg);
+  transform: perspective(8000px) rotateY(180deg);
+}
+.flip3D .back {
+    margin-top: -70px;
+ -webkit-transform: perspective(8000px) rotateY(180deg);
+  transform: perspective(8000px) rotateY(180deg);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: transform 1s linear 0s;
+  -moz-transition: transform 1s linear 0s;
+  -ms-transition: transform 1s linear 0s;
+  -o-transition: transform 1s linear 0s;
+  transition: transform 1s linear 0s;
+}
+
+/*.flip3D:hover .back {
+  -webkit-transform: perspective(8000px) rotateY(0deg);
+  transform: perspective(8000px) rotateY(0deg);
+}*/
+.flip3D .back.flippedBack {
+    -webkit-transform: perspective(8000px) rotateY(0deg);
+  transform: perspective(8000px) rotateY(0deg);
+}

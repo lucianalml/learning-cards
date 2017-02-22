@@ -17,6 +17,8 @@ import { CardComponent } from './components/card/card.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 
+import { LessonService } from './shared/lesson.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +35,9 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     MaterialModule.forRoot(),
     FlexLayoutModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    LessonService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

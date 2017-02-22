@@ -1,69 +1,50 @@
-import { Component, 
-  OnInit, 
-  trigger, 
-  state, 
-  style, 
-  transition, 
-  animate,
-  ElementRef,
-  ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { Lesson } from '../../shared/lesson';
+import { LessonService } from '../../shared/lesson.service';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css'],
-  animations: [
-    trigger('flipState', [
-      state('active', style({
-        transform: 'rotateY(179.9deg)'
-      })),
-      state('inactive', style({
-        transform: 'rotateY(0)'
-      })),
-      transition('active => inactive', animate('500ms ease-out')),
-      transition('inactive => active', animate('500ms ease-in'))
-    ])  
-  ]
-
+  styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
 
-  @ViewChild('divCard') 
-  divCard: ElementRef;
-
-  cardHeight: number;
-  flip: string = 'inactive';
-
   userName: string = "Wilfried Ifland";
   avatarUrl: string;
-
   progress: number = 0;
-  lesson: string = "Lesson 1 of 6";
 
-  title: string = "Simple text";
+  flipFront:string ='';
+  flippedBack:string ='';
 
-  contentHTML: string = `
-    <p>Ut nostrud nostrud laboris reprehenderit officia reprehenderit irure. Reprehenderit id magna irure sit. Incididunt aute elit dolore pariatur do irure. Mollit officia est adipisicing voluptate tempor pariatur quis nulla minim. Sint eiusmod sint deserunt laboris Lorem eu amet do nisi minim quis aliqua.</p>
+  lesson = new Lesson();
 
-    <p>Magna do veniam do commodo ad exercitation fugiat proident elit reprehenderit occaecat do. Consectetur consectetur eu voluptate Lorem consequat sit ipsum aute eu veniam. Nostrud consectetur amet ea enim magna velit duis minim. Fugiat nulla mollit laborum sunt magna laborum. Eu pariatur sit ea nulla incididunt exercitation qui mollit. Consectetur est ut exercitation cillum ut exercitation sunt.</p>
-  `;
-
-  constructor() { }
+  constructor(private lessonService: LessonService) { }
 
   ngOnInit() {
+
+    // TODO Get card id from route
+    this.lessonService.getLesson(1)
+      .subscribe(lesson => {
+        this.lesson = lesson;
+    });
+
   }
   
   toggleFlip() {
-    this.flip = (this.flip == 'inactive') ? 'active' : 'inactive';
+   if(this.flipFront == ''){
+     this.flipFront = 'flippedFront';
+    } else {
+      this.flipFront ='';
+    }
+  
+  if(this.flippedBack == ''){
+     this.flippedBack ='flippedBack';
 
-    this.cardHeight = this.divCard.nativeElement.firstElementChild.offsetHeight - 48;
+    } else {
+       this.flippedBack ='';
+    }
 
   }
-
-  onResize(event) {
-    // event.target.innerWidth;
-    this.cardHeight = this.divCard.nativeElement.firstElementChild.offsetHeight - 48; 
-  }
-
 
 }

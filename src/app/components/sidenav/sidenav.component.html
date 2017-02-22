@@ -6,7 +6,7 @@
     <md-progress-bar 
         [value]="concluded">
     </md-progress-bar>
-    <span>{{concluded}}% complete</span>
+    <span>{{concluded | number : '1.0-0' }}% complete</span>
     <br>
     <br>
   </div>

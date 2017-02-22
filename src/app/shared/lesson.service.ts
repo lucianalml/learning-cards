@@ -13,7 +13,7 @@ export class LessonService {
   constructor(private http: Http) { 
 
     // Load initial data
-    this.http.get('/assets/lessons.json')
+    this.http.get('./assets/lessons.json')
       .map(response => this.toLessons(response.json()))
       .subscribe(lessons => { 
         this.lessons = lessons;

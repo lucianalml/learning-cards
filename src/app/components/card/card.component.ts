@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Subscription } from 'rxjs/Rx';
+import { ActivatedRoute, Params } from "@angular/router";
 
 import { Lesson } from '../../shared/lesson';
 import { LessonService } from '../../shared/lesson.service';
@@ -10,6 +12,14 @@ import { LessonService } from '../../shared/lesson.service';
 })
 export class CardComponent implements OnInit {
 
+  private subscription: Subscription;
+
+
+  @Input()
+  lesson: Lesson;
+  // lessonId;
+  // lesson = new Lesson();
+
   userName: string = "Wilfried Ifland";
   avatarUrl: string;
   progress: number = 0;
@@ -17,20 +27,32 @@ export class CardComponent implements OnInit {
   flipFront:string ='';
   flippedBack:string ='';
 
-  lesson = new Lesson();
 
-  constructor(private lessonService: LessonService) { }
+  constructor(private route: ActivatedRoute,
+    private lessonService: LessonService) { }
 
-  ngOnInit() {
+  // ngOnInit() {
+  //   this.subscription = this.route.params.subscribe(params => {
+  //     this.lessonId = +params['id'];
 
-    // TODO Get card id from route
-    this.lessonService.getLesson(1)
-      .subscribe(lesson => {
-        this.lesson = lesson;
-    });
+  //       console.log("card componenteee " + this.lessonId);
 
+  //       this.lessonService.getLesson(this.lessonId)
+  //         .subscribe(lesson => {
+          
+  //         this.lesson = lesson;
+  //     });
+      
+  //   });
+
+  // }
+
+  ngOnInit(): void {
+    // this.route.params
+    //   .switchMap((params: Params) => this.lessonService.getLesson(+params['id']))
+    //   .subscribe(lesson => this.lesson = lesson);
   }
-  
+
   toggleFlip() {
    if(this.flipFront == ''){
      this.flipFront = 'flippedFront';
@@ -45,6 +67,12 @@ export class CardComponent implements OnInit {
        this.flippedBack ='';
     }
 
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

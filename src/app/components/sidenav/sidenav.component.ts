@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { MdSidenav } from '@angular/material';
 
 import { Lesson } from '../../shared/lesson';
 import { LessonService } from '../../shared/lesson.service';
@@ -9,6 +11,9 @@ import { LessonService } from '../../shared/lesson.service';
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent implements OnInit {
+
+  @ViewChild('sidenav') 
+  sidenav : MdSidenav;
 
   lessons: Lesson[] = [];
   concluded = 0;
@@ -27,6 +32,10 @@ export class SidenavComponent implements OnInit {
 
   checkLesson(i: number){
     this.lessonService.checkLesson(this.lessons[i]);
+  }
+
+  toggle(){
+    this.sidenav.toggle();
   }
 
 }

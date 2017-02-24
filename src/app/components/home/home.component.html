@@ -1,11 +1,41 @@
 <md-sidenav-container>
-  <md-sidenav #sidenav>
-    <app-sidenav></app-sidenav>
-  </md-sidenav>
+
+    <app-toolbar (toggle)="onClicked($event)" ></app-toolbar>
+
+    <md-sidenav #sidenav>
+
+        <!-- Sidebar Header -->
+        <div fxLayout="row" style="background-color: orange" fxLayoutAlign="center start">
+            <div fxFlex="80%">  
+            <h2>Text</h2>
+            <md-progress-bar 
+                [value]="concluded">
+            </md-progress-bar>
+            <span>{{concluded | number : '1.0-0' }}% complete</span>
+            <br>
+            <br>
+            </div>
+        </div>
+
+        <!-- Lessons list -->
+        <md-nav-list>
+            <a *ngFor="let lesson of lessons; let i = index" md-list-item>
+            <md-icon md-list-icon>format_align_left</md-icon>
+            <a (click)='showLesson(i)'>
+                <span> {{lesson.title}} </span>
+            </a>
+            <span fxFlex><!-- fill space --></span>
+            <button md-icon-button (click)="checkLesson(i)">
+                <md-icon *ngIf="lesson.completed">check_circle</md-icon>
+                <md-icon *ngIf="!lesson.completed">radio_button_unchecked</md-icon>
+            </button>
+            </a>
+        </md-nav-list>
+    </md-sidenav>
+
 
     <!-- Main content -->
-    <app-toolbar (toggle)="onClicked($event)" ></app-toolbar>
-    <app-card></app-card>
+    <app-card [lesson]="selectedLesson"></app-card>
+
 
 </md-sidenav-container>
-
